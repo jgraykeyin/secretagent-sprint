@@ -1,0 +1,20 @@
+{
+  "name": "secretagent-sprint",
+  "version": "1.0.0",
+  "description": "Nodejs, Express, PostgreSQL server built for Semester 3's first Sprint Week",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jgraykeyin/secretagent-sprint.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jgraykeyin/secretagent-sprint/issues"
+  },
+  "homepage": "https://github.com/jgraykeyin/secretagent-sprint#readme"
+}

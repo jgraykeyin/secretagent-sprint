@@ -12,7 +12,8 @@ const getUsers = (request, response) => {
         if (error) {
             throw error;
         }
-        response.status(200).json(results.row);
+        console.log('Show all users');
+        response.status(200).json(results.rows);
     });
 }
 

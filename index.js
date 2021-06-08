@@ -22,6 +22,9 @@ app.get('/', (request, response) => {
 // Show all users route
 app.get('/users', db.getUsers);
 
+// Show specific user based on ID
+app.get('/user:id', db,db.getUserById);
+
 app.listen(port, () => {
     console.log(`App is running on port ${port}`);
 });

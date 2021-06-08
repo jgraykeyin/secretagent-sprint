@@ -28,6 +28,8 @@ app.get('/users/:id', db.getUserById);
 // Create a new message
 app.post('/receive', db.createMessage);
 
+app.get('/display', db.getMessages);
+
 app.listen(port, () => {
     console.log(`App is running on port ${port}`);
 });

@@ -17,6 +17,16 @@ const getUsers = (request, response) => {
     });
 }
 
+const getMessages = (request, response) => {
+    pool.query('SELECT * FROM messages ORDER BY id ASC', (error, results) => {
+        if (error) {
+            throw error;
+        }
+        console.log("Show all messages");
+        response.status(200).json(results.rows);
+    });
+}
+
 const getUserById = (request, response) => {
     console.log("Getting USER");
     const id = parseInt(request.params.id);
@@ -56,5 +66,6 @@ module.exports = {
     getUsers,
     getUserById,
     createUser,
-    createMessage
+    createMessage,
+    getMessages
 }

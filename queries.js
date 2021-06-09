@@ -7,38 +7,28 @@ const pool = new Pool({
     port: 5433,
 });
 
-const getUsers = (request, response) => {
-    pool.query('SELECT * FROM agents ORDER BY id ASC', (error, results) => {
-        if (error) {
-            throw error;
-        }
-        console.log('Show all users');
-        response.status(200).json(results.rows);
-    });
-}
 
 const getMessages = (request, response) => {
-    pool.query('SELECT * FROM messages ORDER BY id ASC', (error, results) => {
+
+    // Select the most recent message from the database
+    pool.query('SELECT * FROM messages ORDER BY id DESC LIMIT 1', (error, results) => {
         if (error) {
             throw error;
         }
-        console.log("Show all messages");
+
+        // Delete the selected message from the database
+        pool.query('DELETE FROM messages WHERE id=$1', [results.rows[0]["id"]], (error, results) => {
+            if (error) {
+                throw error;
+            }
+            console.log("Deleted the message!");
+        });
+
+        // Display the message
         response.status(200).json(results.rows);
     });
 }
 
-const getUserById = (request, response) => {
-    console.log("Getting USER");
-    const id = parseInt(request.params.id);
-
-    pool.query('SELECT * FROM agents WHERE id = $1', [id], (error, results) => {
-        if (error) {
-            throw error
-        }
-
-        response.status(200).json(results.rows);
-    });
-}
 
 const createMessage = (request, response) => {
     const { agent, message } = request.body;
@@ -51,21 +41,8 @@ const createMessage = (request, response) => {
     });
 }
 
-const createUser = (request, response) => {
-    const { codename } = request.body;
-
-    pool.query('INSERT INTO agents (codename) VALUES ($1)', [codename], (error, results) => {
-        if (error) {
-            throw error;
-        }
-        response.status(201).send(`User added with ID: ${results.insertId}`);
-    });
-}
 
 module.exports = {
-    getUsers,
-    getUserById,
-    createUser,
     createMessage,
     getMessages
 }

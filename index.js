@@ -19,16 +19,11 @@ app.get('/', (request, response) => {
     })
 });
 
-// Show all users route
-app.get('/users', db.getUsers);
-
-// Show specific user based on ID
-app.get('/users/:id', db.getUserById);
 
 // Create a new message
-app.post('/receive', db.createMessage);
+app.post('/send', db.createMessage);
 
-app.get('/display', db.getMessages);
+app.get('/read', db.getMessages);
 
 app.listen(port, () => {
     console.log(`App is running on port ${port}`);

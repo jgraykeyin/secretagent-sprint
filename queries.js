@@ -15,19 +15,30 @@ const getMessages = (request, response) => {
     // Select the most recent message from the database
     pool.query('SELECT * FROM messages ORDER BY id DESC LIMIT 1', (error, results) => {
         if (error) {
-            throw error;
+            throw error
         }
 
-        // Delete the selected message from the database
-        pool.query('DELETE FROM messages WHERE id=$1', [results.rows[0]["id"]], (error, results) => {
-            if (error) {
-                throw error;
-            }
-            console.log("Deleted the message!");
-        });
+        if (results.rows[0]) {
 
-        // Display the message
-        response.status(200).json(results.rows);
+            // Delete the selected message from the database
+            pool.query('DELETE FROM messages WHERE id=$1', [results.rows[0]["id"]], (error, results) => {
+                if (error) {
+                    throw error;
+                }
+                console.log("Deleted the message!");
+            });
+
+            // Display the message
+            console.log(results.rows);
+            response.status(200).json(results.rows);
+        } else {
+            let errmsg = {
+                "message":"No Messages Left",
+                "agent_id":99
+            }
+            response.status(200).json(errmsg);
+        }
+
     });
 }
 

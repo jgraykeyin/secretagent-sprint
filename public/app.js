@@ -43,11 +43,31 @@ function showMessage(type) {
     fetch(url).
     then((resp) => resp.json())
     .then(function(data) {
-        let message = data[0]["message"];
-        let agent_id = data[0]["agent_id"];
+
+        let message;
+        try {
+            message = data[0]["message"];
+        } catch {
+            message = "Message Queue Empty"
+        }
+
+        let agent_id;
+        try {
+            agent_id = data[0]["agent_id"];
+        } catch {
+            agent_id = 42;
+        }
+
+        let html = "";
+        if (message !== "Message Queue Empty") {
+            html = `<p>Agent ${agent_id}: ${message}</p>`
+            html += "<p>* Message deleted *</p>"
+        } else {
+            html = message;
+        }
 
         let output = document.getElementById("output");
-        output.innerHTML = `<p>Agent ${agent_id}: ${message}</p><p>* Message deleted *</p>`;
+        output.innerHTML = html;
 
     })
     .catch(function(error) {

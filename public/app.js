@@ -31,6 +31,10 @@ function main() {
 
 function showMessage(type) {
 
+    // Make sure the messenger is hidden
+    let messenger = document.getElementById("messenger-area");
+    messenger.style.display = "none";
+
     if (type !== "read" || type !== "readreverse") {
         type = "read";
     }

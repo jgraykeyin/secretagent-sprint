@@ -33,12 +33,15 @@ const getMessages = (request, response) => {
 const createMessage = (request, response) => {
     const { agent, message } = request.body;
 
-    pool.query('INSERT INTO messages (message,agent_id) VALUES ($1,$2)', [message, agent], (error, results) => {
-        if (error) {
-            throw error;
-        }
-        response.status(201).send('Message added');
-    });
+    if (agent && message) {
+        pool.query('INSERT INTO messages (message,agent_id) VALUES ($1,$2)', [message, agent], (error, results) => {
+            if (error) {
+                throw error;
+            }
+            response.status(201).send('Message added');
+        });
+    }
+
 }
 
 

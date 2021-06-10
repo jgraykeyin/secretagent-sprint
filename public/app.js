@@ -59,6 +59,8 @@ function showMessage(type) {
 
 function sendData() {
 
+    const url = "http://localhost:3000/send/"
+
     // Get the secret agent ID and message inputs
     let agentID = document.getElementById("agent-id").value;
     let message = document.getElementById("message").value;
@@ -70,7 +72,7 @@ function sendData() {
     }
 
     // Send the proper POST request to the node server
-    fetch("http://localhost:3000/send/", {
+    fetch(url, {
         method: "POST",
         headers: {
             "Accept": "application/json",

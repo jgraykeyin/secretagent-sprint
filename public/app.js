@@ -20,7 +20,7 @@ function main() {
 
     let readOldBtn = document.getElementById("read-reverse-btn");
     readOldBtn.addEventListener("click", () => {
-        showMessage("readreverse");
+        showMessage("old");
     });
 
     // Send form POST data to node server
@@ -31,15 +31,14 @@ function main() {
 
 function showMessage(type) {
 
+    console.log(type);
+
     // Make sure the messenger is hidden
     let messenger = document.getElementById("messenger-area");
     messenger.style.display = "none";
 
-    if (type !== "read" || type !== "readreverse") {
-        type = "read";
-    }
-
-    const url = `http://localhost:3000/${type}`;
+    let url = `http://localhost:3000/${type}`;
+    console.log(url)
 
     fetch(url).
     then((resp) => resp.json())

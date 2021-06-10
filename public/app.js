@@ -12,9 +12,34 @@ function main() {
         messenger.style.display = "block";
     });
 
+    // Display some output when Read message links are clicked
+    let readLatestBtn = document.getElementById("read-msg-btn");
+    readLatestBtn.addEventListener("click", showMessage);
+
     // Send form POST data to node server
     let submitMsgBtn = document.getElementById("submit-message");
     submitMsgBtn.addEventListener("click", sendData);
+}
+
+
+function showMessage() {
+
+    const url = 'http://localhost:3000/read';
+
+    fetch(url).
+    then((resp) => resp.json())
+    .then(function(data) {
+        console.log(data);
+        let message = data[0]["message"];
+        let agent_id = data[0]["agent_id"];
+
+        let output = document.getElementById("output");
+        output.innerHTML = `Message from Agent ${agent_id}: ${message}`
+
+    })
+    .catch(function(error) {
+        console.log(error);
+    });
 }
 
 

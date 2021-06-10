@@ -11,8 +11,12 @@ body {
 .wopr-text {
     color: #b5d6fd;
     font-family: 'VT323', monospace;
-    font-size: 28px;
+    font-size: 32px;
     text-shadow: 0px 0px 20px #b5d6fd;
+}
+
+.ui-link {
+    cursor: pointer;
 }
 
 .line-break {

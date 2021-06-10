@@ -20,16 +20,18 @@ function main() {
 
 function sendData() {
 
+    // Get the secret agent ID and message inputs
     let agentID = document.getElementById("agent-id").value;
     let message = document.getElementById("message").value;
 
+    // Create an object with our super secret data
     let data = {
         "agent": agentID,
         "message": message
     }
 
     // Send the proper POST request to the node server
-    fetch("http://192.168.2.28:3000/send/", {
+    fetch("http://localhost:3000/send/", {
         method: "POST",
         headers: {
             "Accept": "application/json",
@@ -42,11 +44,18 @@ function sendData() {
     })
     .then(response => {
 
+        // Check the server's response text
         response.text().then(text => {
             console.log(text)
             if (text === "Message added") {
+
+                // Hide the messenger area
                 let messenger = document.getElementById("messenger-area");
                 messenger.style.display = "none";
+
+                // Clear the input fields
+                document.getElementById("agent-id").value = "";
+                document.getElementById("message").value = "";
 
                 let output = document.getElementById("output");
                 output.innerHTML = "Message sent";

@@ -4,6 +4,10 @@ function main() {
     let sendMsgBtn = document.getElementById("send-msg-btn");
     sendMsgBtn.addEventListener("click", function() {
 
+        // Make sure the output area is cleared out before we make the message form appear
+        let output = document.getElementById("output");
+        output.innerHTML = "";
+
         let messenger = document.getElementById("messenger-area");
         messenger.style.display = "block";
     });

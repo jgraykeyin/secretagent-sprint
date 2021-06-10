@@ -1,0 +1,53 @@
+body {
+    background-color: black;
+    padding: 1rem;
+}
+
+.gamelist {
+    list-style-type: none;
+    padding: 0;
+}
+
+.wopr-text {
+    color: #b5d6fd;
+    font-family: 'VT323', monospace;
+    font-size: 28px;
+    text-shadow: 0px 0px 20px #b5d6fd;
+}
+
+.line-break {
+    border: 2px dashed #b5d6fd;
+    text-shadow: 0px 0px 20px #b5d6fd;
+    margin-bottom: 20px;
+}
+
+.input-row {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 10px;
+}
+
+.wopr-input {
+    background-color: black;
+    border: 1px solid #b5d6fd;
+    margin-left: 10px;
+    margin-top: 2px;
+    font-size: 18px;
+    color: #fff;
+}
+
+.wopr-button {
+    background-color: black;
+    color: #b5d6fd;
+    font-family: 'VT323', monospace;
+    font-size: 28px;
+    text-shadow: 0px 0px 20px #b5d6fd;
+    border: 2px solid #b5d6fd;
+    padding: 6px 20px 6px 20px;
+    margin-top: 10px;
+    box-shadow: 0px 0px 8px #374d68;
+}
+
+.messenger {
+    display: none;
+}

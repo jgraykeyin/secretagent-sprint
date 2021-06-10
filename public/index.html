@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shall we play a game?</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+    <script type="text/javascript" src="app.js"></script>
+</head>
+<body>
+    
+    <p class="wopr-text">Game List</p>
+
+    <ul class="gamelist wopr-text">
+        <li>BRIDGE</li>
+        <li>CHESS</li>
+        <li>POKER</li>
+        <li>GLOBAL THERMONUCLEAR WAR</li>
+        <li id="send-msg-btn">SEND MESSAGE</li>
+        <li id="read-msg-btn">READ MESSAGE</li>
+    </ul>
+
+    <hr class="line-break">
+
+    <div class="messenger" id="messenger-area">
+        <div class="input-row">
+            <div class="wopr-text">AGENT ID:</div>
+            <div><input type="text" class="wopr-input" id="agent-id"></div>
+        </div>
+
+        <div class="input-row">
+            <div class="wopr-text"> MESSAGE:</div>
+            <div><input type="text" class="wopr-input" id="message"></div>
+        </div>
+
+        <button type="button" id="submit-message" class="wopr-button">SEND</button>
+    </div>
+
+    <div id="output" class="wopr-text"></div>
+
+
+</body>
+</html>

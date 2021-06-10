@@ -26,19 +26,21 @@ function main() {
     // Send form POST data to node server
     let submitMsgBtn = document.getElementById("submit-message");
     submitMsgBtn.addEventListener("click", sendData);
+
+    // Use InputFilter to make the Agent ID box accept numbers-only
+    setInputFilter(document.getElementById("agent-id"), (value) => {
+        return /^\d*$/.test(value);
+    });
 }
 
 
 function showMessage(type) {
-
-    console.log(type);
 
     // Make sure the messenger is hidden
     let messenger = document.getElementById("messenger-area");
     messenger.style.display = "none";
 
     let url = `http://localhost:3000/${type}`;
-    console.log(url)
 
     fetch(url).
     then((resp) => resp.json())
@@ -123,5 +125,25 @@ function sendData() {
         })
     });
 }
+
+
+// Restricts input for the given textbox to the given inputFilter.
+// Thanks to emkey08 on jsfiddle.net for this function.
+function setInputFilter(textbox, inputFilter) {
+    ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function(event) {
+      textbox.addEventListener(event, function() {
+        if (inputFilter(this.value)) {
+          this.oldValue = this.value;
+          this.oldSelectionStart = this.selectionStart;
+          this.oldSelectionEnd = this.selectionEnd;
+        } else if (this.hasOwnProperty("oldValue")) {
+          this.value = this.oldValue;
+          this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+        } else {
+          this.value = "";
+        }
+      });
+    });
+  }
 
 window.addEventListener("load", main);

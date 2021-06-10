@@ -26,6 +26,8 @@ app.post('/send', db.createMessage);
 
 app.get('/read', db.getMessages);
 
+app.get('/readreverse', db.getMessagesReverse);
+
 app.listen(port, () => {
     console.log(`App is running on port ${port}`);
 });

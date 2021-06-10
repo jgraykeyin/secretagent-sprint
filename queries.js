@@ -10,12 +10,37 @@ const pool = new Pool({
 
 const getMessages = (request, response) => {
 
+    console.log("Normal");
+
     // Select the most recent message from the database
     pool.query('SELECT * FROM messages ORDER BY id DESC LIMIT 1', (error, results) => {
         if (error) {
             throw error;
         }
 
+        // Delete the selected message from the database
+        pool.query('DELETE FROM messages WHERE id=$1', [results.rows[0]["id"]], (error, results) => {
+            if (error) {
+                throw error;
+            }
+            console.log("Deleted the message!");
+        });
+
+        // Display the message
+        response.status(200).json(results.rows);
+    });
+}
+
+// TODO: Combine this with previous getMessage by using a prop variable
+const getMessagesReverse = (request, response) => {
+    console.log("Reverse")
+
+    // Select the oldest message from the database
+    pool.query('SELECT * FROM messages ORDER BY id ASC LIMIT 1', (error, results) => {
+        if (error) {
+            throw error;
+        }
+        
         // Delete the selected message from the database
         pool.query('DELETE FROM messages WHERE id=$1', [results.rows[0]["id"]], (error, results) => {
             if (error) {
@@ -47,5 +72,6 @@ const createMessage = (request, response) => {
 
 module.exports = {
     createMessage,
-    getMessages
+    getMessages,
+    getMessagesReverse
 }

@@ -14,7 +14,14 @@ function main() {
 
     // Display some output when Read message links are clicked
     let readLatestBtn = document.getElementById("read-msg-btn");
-    readLatestBtn.addEventListener("click", showMessage);
+    readLatestBtn.addEventListener("click", () => {
+        showMessage("read");
+    });
+
+    let readOldBtn = document.getElementById("read-reverse-btn");
+    readOldBtn.addEventListener("click", () => {
+        showMessage("readreverse");
+    });
 
     // Send form POST data to node server
     let submitMsgBtn = document.getElementById("submit-message");
@@ -22,19 +29,22 @@ function main() {
 }
 
 
-function showMessage() {
+function showMessage(type) {
 
-    const url = 'http://localhost:3000/read';
+    if (type !== "read" || type !== "readreverse") {
+        type = "read";
+    }
+
+    const url = `http://localhost:3000/${type}`;
 
     fetch(url).
     then((resp) => resp.json())
     .then(function(data) {
-        console.log(data);
         let message = data[0]["message"];
         let agent_id = data[0]["agent_id"];
 
         let output = document.getElementById("output");
-        output.innerHTML = `Message from Agent ${agent_id}: ${message}`
+        output.innerHTML = `<p>Agent ${agent_id}: ${message}</p><p>* Message deleted *</p>`;
 
     })
     .catch(function(error) {

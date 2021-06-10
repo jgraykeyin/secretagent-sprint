@@ -28,9 +28,18 @@ const getMessages = (request, response) => {
                 console.log("Deleted the message!");
             });
 
-            // Display the message
-            console.log(results.rows);
-            response.status(200).json(results.rows);
+            // Get the Agent's Codename
+            pool.query('SELECT * FROM agents WHERE id=$1', [results.rows[0]["agent_id"]], (errname, resname) => {
+                if (errname) {
+                    throw errname;
+                }
+                results.rows[0].codename = resname.rows[0]["codename"];
+
+                 // Display the message
+                console.log(results.rows);
+                response.status(200).json(results.rows);
+            });
+
         } else {
             let errmsg = {
                 "message":"No Messages Left",

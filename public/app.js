@@ -60,9 +60,16 @@ function showMessage(type) {
             agent_id = 42;
         }
 
+        let codename;
+        try {
+            codename = data[0]["codename"];
+        } catch {
+            codename = "Null";
+        }
+
         let html = "";
         if (message !== "Message Queue Empty") {
-            html = `<p>Agent ${agent_id}: ${message}</p>`
+            html = `<p>Agent ${codename}: ${message}</p>`
             html += "<p>* Message deleted *</p>"
         } else {
             html = message;

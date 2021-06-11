@@ -31,6 +31,42 @@ function main() {
     setInputFilter(document.getElementById("agent-id"), (value) => {
         return /^\d*$/.test(value);
     });
+
+    // Listen for the other decorative buttons
+    let chessBtn = document.getElementById("chess-btn");
+    let pokerBtn = document.getElementById("poker-btn");
+    let warBtn = document.getElementById("war-btn");
+
+    chessBtn.addEventListener("click", () => {
+        notAvailable("Chess");
+    });
+
+    pokerBtn.addEventListener("click", () => {
+        notAvailable("Poker");
+    });
+
+    warBtn.addEventListener("click", () => {
+
+        let warHTML = '<div class="wopr-text">WHICH SIDE DO YOU WANT?</div>';
+        warHTML += '<ol class="wopr-text">';
+        warHTML += '<li>UNITED STATES</li><li>SOVIET UNION</li></ol>';
+        warHTML += '<div class="wopr-text">INSUFFICIENT ACCESS LEVEL TO START GLOBAL WAR<br />PLEASE TRY AGAIN LATER</div>';
+
+        document.getElementById("output").innerHTML = warHTML
+
+    })
+}
+
+
+// Output some text for the decorative menu items that don't have actual functionality
+function notAvailable(item) {
+
+    // Make sure the messenger is hidden
+    let messenger = document.getElementById("messenger-area");
+    messenger.style.display = "none";
+    
+    document.getElementById("output").innerHTML = `${item} will be available in Q2 1984`;
+
 }
 
 

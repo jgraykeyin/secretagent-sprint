@@ -24,8 +24,10 @@ app.get('/', (request, response) => {
 // Create a new message
 app.post('/send', db.createMessage);
 
+// Read new message
 app.get('/read', db.getMessages);
 
+// Read oldest message
 app.get('/old', db.getMessagesReverse);
 
 app.listen(port, () => {

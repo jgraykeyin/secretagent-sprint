@@ -1,2 +1,2 @@
 # Secret Agent Sprint Project
-Nodejs, Express, PostgreSQL server built for Semester 3's first Sprint Week
+Nodejs, Express, PostgreSQL server built for Semester 3's first Sprint Week. The server uses a database named 'topsecret' to store messages from secret agents using the site as a communications hub. The database also contains codenames of 999 agents which must be initially imported using the importnames.js script. Live version of the site is currently running at http://heyjustingray.com:3000.

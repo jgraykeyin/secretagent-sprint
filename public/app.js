@@ -8,8 +8,7 @@ function main() {
         let output = document.getElementById("output");
         output.innerHTML = "";
 
-        let messenger = document.getElementById("messenger-area");
-        messenger.style.display = "block";
+        toggleMessenger("block");
     });
 
     // Display some output when Read message links are clicked
@@ -47,6 +46,9 @@ function main() {
 
     warBtn.addEventListener("click", () => {
 
+        // Hide the messenger
+        toggleMessenger("none");
+
         let warHTML = '<div class="wopr-text">WHICH SIDE DO YOU WANT?</div>';
         warHTML += '<ol class="wopr-text">';
         warHTML += '<li>UNITED STATES</li><li>SOVIET UNION</li></ol>';
@@ -58,26 +60,26 @@ function main() {
 }
 
 
+function toggleMessenger(state) {
+    let messenger = document.getElementById("messenger-area");
+    messenger.style.display = state;
+}
+
+
 // Output some text for the decorative menu items that don't have actual functionality
 function notAvailable(item) {
-
     // Make sure the messenger is hidden
-    let messenger = document.getElementById("messenger-area");
-    messenger.style.display = "none";
-    
+    toggleMessenger("none");
     document.getElementById("output").innerHTML = `${item} will be available in Q2 1984`;
-
 }
 
 
 function showMessage(type) {
 
     // Make sure the messenger is hidden
-    let messenger = document.getElementById("messenger-area");
-    messenger.style.display = "none";
+    toggleMessenger("none");
 
     let baseurl = window.location.hostname
-
     let url = `http://${baseurl}:3000/${type}`;
 
     fetch(url).
@@ -158,8 +160,7 @@ function sendData() {
             if (text === "Message added") {
 
                 // Hide the messenger area
-                let messenger = document.getElementById("messenger-area");
-                messenger.style.display = "none";
+                toggleMessenger("none");
 
                 // Clear the input fields
                 document.getElementById("agent-id").value = "";

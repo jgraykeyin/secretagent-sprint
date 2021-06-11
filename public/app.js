@@ -89,7 +89,8 @@ function showMessage(type) {
 
 function sendData() {
 
-    const url = "http://localhost:3000/send/"
+    let baseurl = window.location.hostname
+    let url = `http://${baseurl}:3000/send`;
 
     // Get the secret agent ID and message inputs
     let agentID = document.getElementById("agent-id").value;

@@ -40,7 +40,9 @@ function showMessage(type) {
     let messenger = document.getElementById("messenger-area");
     messenger.style.display = "none";
 
-    let url = `http://localhost:3000/${type}`;
+    let baseurl = window.location.hostname
+
+    let url = `http://${baseurl}:3000/${type}`;
 
     fetch(url).
     then((resp) => resp.json())

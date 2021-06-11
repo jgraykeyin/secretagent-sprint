@@ -10,8 +10,6 @@ const pool = new Pool({
 
 const getMessages = (request, response) => {
 
-    console.log("Normal");
-
     // Select the most recent message from the database
     pool.query('SELECT * FROM messages ORDER BY id DESC LIMIT 1', (error, results) => {
         if (error) {
@@ -25,7 +23,6 @@ const getMessages = (request, response) => {
                 if (error) {
                     throw error;
                 }
-                console.log("Deleted the message!");
             });
 
             // Get the Agent's Codename
@@ -36,7 +33,6 @@ const getMessages = (request, response) => {
                 results.rows[0].codename = resname.rows[0]["codename"];
 
                  // Display the message
-                console.log(results.rows);
                 response.status(200).json(results.rows);
             });
 
@@ -47,13 +43,11 @@ const getMessages = (request, response) => {
             }
             response.status(200).json(errmsg);
         }
-
     });
 }
 
 // TODO: Combine this with previous getMessage by using a prop variable
 const getMessagesReverse = (request, response) => {
-    console.log("Reverse")
 
     // Select the oldest message from the database
     pool.query('SELECT * FROM messages ORDER BY id ASC LIMIT 1', (error, results) => {
@@ -68,11 +62,9 @@ const getMessagesReverse = (request, response) => {
                 if (error) {
                     throw error;
                 }
-                console.log("Deleted the message!");
             });
 
             // Display the message
-            console.log(results.rows);
             response.status(200).json(results.rows);
         } else {
             let errmsg = {
